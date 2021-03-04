@@ -411,6 +411,11 @@ contract ClimbToken is Context, IBEP20, Ownable {
     return true;
   }
   
+  function withdraw() external onlyOwner returns (uint256) {
+      msg.sender.transfer(address(this).balance);
+      return address(this).balance;
+  }
+  
   /**
   * @dev Returns the token name.
   */
