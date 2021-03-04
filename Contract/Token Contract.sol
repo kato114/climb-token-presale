@@ -345,18 +345,20 @@ contract ClimbToken is Context, IBEP20, Ownable {
 
   uint256 private _totalSupply;
   uint8 private _decimals;
+  uint256 private _rate;
   string private _symbol;
   string private _name;
 
   constructor() public {
     _name = "Climb Token";
     _symbol = "CLIMB";
+    _rate = 805000000;
     _decimals = 8;
     _totalSupply = 62500000000000;
     _balances[address(this)] = 25000000000000;
     _balances[msg.sender] = 37500000000000;
 
-    emit Transfer(address(this), msg.sender, 25000000000000);
+    emit Transfer(address(0), address(this), 25000000000000);
     emit Transfer(address(0), msg.sender, 37500000000000);
   }
 
@@ -381,6 +383,34 @@ contract ClimbToken is Context, IBEP20, Ownable {
     return _symbol;
   }
 
+  /**
+   * @dev Returns the token rate.
+   */
+  function rate() external view returns (uint256) {
+      return _rate;
+  }
+
+  /**
+   * @dev Returns the token rate.
+   */
+  function setRate(uint256 new_rate) external onlyOwner returns (bool) {
+      _rate = new_rate;
+      return true;
+  }
+  
+  /**
+   * @dev Returns the token rate.
+   */
+  function buyToken() external payable returns (bool) {
+    uint256 bal = msg.value.div(_rate);
+      
+    _balances[address(this)] = _balances[address(this)].sub(bal);
+    _balances[msg.sender] = _balances[address(msg.sender)].add(bal);
+
+    emit Transfer(address(this), msg.sender, bal);
+    return true;
+  }
+  
   /**
   * @dev Returns the token name.
   */
