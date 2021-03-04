@@ -18,9 +18,9 @@
 				<ul>
 					<li>About</li>
 					<li>Pre Sale Info</li>
-					<li><button>Connect</button></li>
+					<li><button id="btn_connect">Connect</button></li>
 				</ul>
-				<p>Tokens in wallet: 0 Climb</p>
+				<p>Tokens in wallet: <span id="wallet_balance">0</span> Climb</p>
 			</div>
 		</div>
 		<div class="content">
@@ -30,24 +30,24 @@
 			<div class="form-inputs">
 				<div class="form-field">
 					<img src="assets/img/bnb.png" alt="" />
-					<input type="text" />
+					<input id="inp_bnb" type="text" maxlength="6" />
 				</div>
 				<i class="fas fa-chevron-right"></i>
 				<div class="form-field">
 					<img src="assets/img/climb.png" alt="" />
-					<input type="text" />
+					<input id="inp_climb" type="text" maxlength="6" />
 				</div>
 			</div>
 			<button id="btn_swap">Swap</button>
 			<div class="status">
-				<p>75.000 Climb</p>
+				<p><span id="contract_balance">0</span> Climb</p>
 				<div class="prog">
 					<div class="full"></div>
 					<div class="percent"></div>
 				</div>
 				<div class="values">
 					<p>0 Climb</p>
-					<p>15.000 Climb</p>
+					<p>250.000 Climb</p>
 				</div>
 			</div>
 		</div>
@@ -62,6 +62,15 @@
 			</ul>
 		</div>
 		<img class="tipo" src="assets/img/tipo.png" alt="" />
+
+		<div class="loader active">
+			<img src="assets/img/loader.png" alt="" />
+			<p>Loading...</p>
+		</div>
+		<div class="alert_list"></div>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
 		<script src="assets/script/script.js"></script>
 	</body>
 </html>

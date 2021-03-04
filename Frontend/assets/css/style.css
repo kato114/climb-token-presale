@@ -181,11 +181,11 @@ button:active {
 
 .percent {
 	margin-top: -20px;
-	width: 50%;
+	width: 0%;
 	height: 100%;
 	background: #36f3d2;
-	border-top-left-radius: 20px;
-	border-bottom-left-radius: 20px;
+	border-radius: 20px;
+	transition: width ease 1s;
 }
 
 .full {
@@ -223,4 +223,63 @@ button:active {
 	bottom: 0px;
 	max-width: 42vw;
 	z-index: -1;
+}
+
+.alert_list {
+	position: fixed;
+
+	right: 30px;
+	bottom: 30px;
+}
+
+.alert_list > * {
+	width: 300px;
+	padding: 15px 20px;
+	margin-top: 10px;
+
+	display: flex;
+	align-items: center;
+
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: 600;
+
+	background-color: rgb(182, 54, 45);
+}
+
+.alert_success {
+	background-color: rgb(41, 168, 41);
+}
+
+.loader {
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	display: none;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.loader.active {
+	display: flex;
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+.loader > img {
+	animation: rotation 2s infinite linear;
+}
+
+@keyframes rotation {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(359deg);
+	}
+}
+
+#btn_connect.connected {
+	background-color: rgb(255, 176, 176);
 }
