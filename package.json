@@ -1,0 +1,16 @@
+{
+	"name": "backend",
+	"version": "1.0.0",
+	"description": "Climb Token Presale Backend",
+	"main": "server.js",
+	"scripts": {
+		"start": "node backend/server",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Gleb",
+	"license": "MIT",
+	"dependencies": {
+		"express": "^4.17.1",
+		"web3": "^1.3.4"
+	}
+}
