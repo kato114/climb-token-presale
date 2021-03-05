@@ -89,9 +89,14 @@ button:active {
 }
 
 .nav ul li {
-	font-size: 15px;
 	margin-left: 30px;
+}
+
+.nav ul li a {
+	color: white;
+	font-size: 15px;
 	text-shadow: rgb(0 0 0 / 60%) 0px 4px 8px;
+	text-decoration: none;
 }
 
 .nav p {
@@ -217,11 +222,20 @@ button:active {
 	font-size: 20px;
 }
 
+.footer ul li a {
+	color: white;
+}
+
+.footer img {
+	width: 32px;
+	margin: 0px -6px;
+}
+
 .tipo {
 	position: absolute;
 	right: 0px;
 	bottom: 0px;
-	max-width: 42vw;
+	max-width: 30vw;
 	z-index: -1;
 }
 

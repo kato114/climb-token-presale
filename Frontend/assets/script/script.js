@@ -500,7 +500,7 @@ window.addEventListener('load', async function () {
 				.call()
 				.then(function (balance) {
 					let percent = ((maxSupply - balance / 1e8) / maxSupply) * 100
-					if (percent < 4) percent = 4
+					if (percent > 0 && percent < 4) percent = 4
 
 					document.getElementById('contract_balance').innerText = format(maxSupply - balance / 1e8)
 					document.querySelector('.percent').style.width = percent + '%'
