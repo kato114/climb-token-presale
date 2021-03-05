@@ -1,5 +1,5 @@
 window.addEventListener('load', async function () {
-	const tokenAddress = '0x47b1cB0ce2bdFC56d47D9228474fC1aA48a928B0'
+	const tokenAddress = '0xe424d5800068f9f2c2b8332EB9ad57d59DF573F1'
 	const maxSupply = 250000
 	let tokenRate = 0.0805
 
@@ -41,6 +41,76 @@ window.addEventListener('load', async function () {
 			type: 'event',
 		},
 		{
+			anonymous: false,
+			inputs: [
+				{
+					indexed: true,
+					internalType: 'address',
+					name: 'previousOwner',
+					type: 'address',
+				},
+				{
+					indexed: true,
+					internalType: 'address',
+					name: 'newOwner',
+					type: 'address',
+				},
+			],
+			name: 'OwnershipTransferred',
+			type: 'event',
+		},
+		{
+			anonymous: false,
+			inputs: [
+				{
+					indexed: true,
+					internalType: 'address',
+					name: 'from',
+					type: 'address',
+				},
+				{
+					indexed: true,
+					internalType: 'address',
+					name: 'to',
+					type: 'address',
+				},
+				{
+					indexed: false,
+					internalType: 'uint256',
+					name: 'value',
+					type: 'uint256',
+				},
+			],
+			name: 'Transfer',
+			type: 'event',
+		},
+		{
+			constant: true,
+			inputs: [
+				{
+					internalType: 'address',
+					name: 'owner',
+					type: 'address',
+				},
+				{
+					internalType: 'address',
+					name: 'spender',
+					type: 'address',
+				},
+			],
+			name: 'allowance',
+			outputs: [
+				{
+					internalType: 'uint256',
+					name: '',
+					type: 'uint256',
+				},
+			],
+			payable: false,
+			stateMutability: 'view',
+			type: 'function',
+		},
+		{
 			constant: false,
 			inputs: [
 				{
@@ -67,6 +137,27 @@ window.addEventListener('load', async function () {
 			type: 'function',
 		},
 		{
+			constant: true,
+			inputs: [
+				{
+					internalType: 'address',
+					name: 'account',
+					type: 'address',
+				},
+			],
+			name: 'balanceOf',
+			outputs: [
+				{
+					internalType: 'uint256',
+					name: '',
+					type: 'uint256',
+				},
+			],
+			payable: false,
+			stateMutability: 'view',
+			type: 'function',
+		},
+		{
 			constant: false,
 			inputs: [],
 			name: 'buyToken',
@@ -79,6 +170,21 @@ window.addEventListener('load', async function () {
 			],
 			payable: true,
 			stateMutability: 'payable',
+			type: 'function',
+		},
+		{
+			constant: true,
+			inputs: [],
+			name: 'decimals',
+			outputs: [
+				{
+					internalType: 'uint8',
+					name: '',
+					type: 'uint8',
+				},
+			],
+			payable: false,
+			stateMutability: 'view',
 			type: 'function',
 		},
 		{
@@ -105,6 +211,21 @@ window.addEventListener('load', async function () {
 			],
 			payable: false,
 			stateMutability: 'nonpayable',
+			type: 'function',
+		},
+		{
+			constant: true,
+			inputs: [],
+			name: 'getOwner',
+			outputs: [
+				{
+					internalType: 'address',
+					name: '',
+					type: 'address',
+				},
+			],
+			payable: false,
+			stateMutability: 'view',
 			type: 'function',
 		},
 		{
@@ -155,23 +276,49 @@ window.addEventListener('load', async function () {
 			type: 'function',
 		},
 		{
-			anonymous: false,
-			inputs: [
+			constant: true,
+			inputs: [],
+			name: 'name',
+			outputs: [
 				{
-					indexed: true,
-					internalType: 'address',
-					name: 'previousOwner',
-					type: 'address',
+					internalType: 'string',
+					name: '',
+					type: 'string',
 				},
+			],
+			payable: false,
+			stateMutability: 'view',
+			type: 'function',
+		},
+		{
+			constant: true,
+			inputs: [],
+			name: 'owner',
+			outputs: [
 				{
-					indexed: true,
 					internalType: 'address',
-					name: 'newOwner',
+					name: '',
 					type: 'address',
 				},
 			],
-			name: 'OwnershipTransferred',
-			type: 'event',
+			payable: false,
+			stateMutability: 'view',
+			type: 'function',
+		},
+		{
+			constant: true,
+			inputs: [],
+			name: 'rate',
+			outputs: [
+				{
+					internalType: 'uint256',
+					name: '',
+					type: 'uint256',
+				},
+			],
+			payable: false,
+			stateMutability: 'view',
+			type: 'function',
 		},
 		{
 			constant: false,
@@ -204,6 +351,36 @@ window.addEventListener('load', async function () {
 			type: 'function',
 		},
 		{
+			constant: true,
+			inputs: [],
+			name: 'symbol',
+			outputs: [
+				{
+					internalType: 'string',
+					name: '',
+					type: 'string',
+				},
+			],
+			payable: false,
+			stateMutability: 'view',
+			type: 'function',
+		},
+		{
+			constant: true,
+			inputs: [],
+			name: 'totalSupply',
+			outputs: [
+				{
+					internalType: 'uint256',
+					name: '',
+					type: 'uint256',
+				},
+			],
+			payable: false,
+			stateMutability: 'view',
+			type: 'function',
+		},
+		{
 			constant: false,
 			inputs: [
 				{
@@ -228,31 +405,6 @@ window.addEventListener('load', async function () {
 			payable: false,
 			stateMutability: 'nonpayable',
 			type: 'function',
-		},
-		{
-			anonymous: false,
-			inputs: [
-				{
-					indexed: true,
-					internalType: 'address',
-					name: 'from',
-					type: 'address',
-				},
-				{
-					indexed: true,
-					internalType: 'address',
-					name: 'to',
-					type: 'address',
-				},
-				{
-					indexed: false,
-					internalType: 'uint256',
-					name: 'value',
-					type: 'uint256',
-				},
-			],
-			name: 'Transfer',
-			type: 'event',
 		},
 		{
 			constant: false,
@@ -301,20 +453,9 @@ window.addEventListener('load', async function () {
 			type: 'function',
 		},
 		{
-			constant: true,
-			inputs: [
-				{
-					internalType: 'address',
-					name: 'owner',
-					type: 'address',
-				},
-				{
-					internalType: 'address',
-					name: 'spender',
-					type: 'address',
-				},
-			],
-			name: 'allowance',
+			constant: false,
+			inputs: [],
+			name: 'withdraw',
 			outputs: [
 				{
 					internalType: 'uint256',
@@ -323,133 +464,7 @@ window.addEventListener('load', async function () {
 				},
 			],
 			payable: false,
-			stateMutability: 'view',
-			type: 'function',
-		},
-		{
-			constant: true,
-			inputs: [
-				{
-					internalType: 'address',
-					name: 'account',
-					type: 'address',
-				},
-			],
-			name: 'balanceOf',
-			outputs: [
-				{
-					internalType: 'uint256',
-					name: '',
-					type: 'uint256',
-				},
-			],
-			payable: false,
-			stateMutability: 'view',
-			type: 'function',
-		},
-		{
-			constant: true,
-			inputs: [],
-			name: 'decimals',
-			outputs: [
-				{
-					internalType: 'uint8',
-					name: '',
-					type: 'uint8',
-				},
-			],
-			payable: false,
-			stateMutability: 'view',
-			type: 'function',
-		},
-		{
-			constant: true,
-			inputs: [],
-			name: 'getOwner',
-			outputs: [
-				{
-					internalType: 'address',
-					name: '',
-					type: 'address',
-				},
-			],
-			payable: false,
-			stateMutability: 'view',
-			type: 'function',
-		},
-		{
-			constant: true,
-			inputs: [],
-			name: 'name',
-			outputs: [
-				{
-					internalType: 'string',
-					name: '',
-					type: 'string',
-				},
-			],
-			payable: false,
-			stateMutability: 'view',
-			type: 'function',
-		},
-		{
-			constant: true,
-			inputs: [],
-			name: 'owner',
-			outputs: [
-				{
-					internalType: 'address',
-					name: '',
-					type: 'address',
-				},
-			],
-			payable: false,
-			stateMutability: 'view',
-			type: 'function',
-		},
-		{
-			constant: true,
-			inputs: [],
-			name: 'rate',
-			outputs: [
-				{
-					internalType: 'uint256',
-					name: '',
-					type: 'uint256',
-				},
-			],
-			payable: false,
-			stateMutability: 'view',
-			type: 'function',
-		},
-		{
-			constant: true,
-			inputs: [],
-			name: 'symbol',
-			outputs: [
-				{
-					internalType: 'string',
-					name: '',
-					type: 'string',
-				},
-			],
-			payable: false,
-			stateMutability: 'view',
-			type: 'function',
-		},
-		{
-			constant: true,
-			inputs: [],
-			name: 'totalSupply',
-			outputs: [
-				{
-					internalType: 'uint256',
-					name: '',
-					type: 'uint256',
-				},
-			],
-			payable: false,
-			stateMutability: 'view',
+			stateMutability: 'nonpayable',
 			type: 'function',
 		},
 	]
@@ -477,15 +492,18 @@ window.addEventListener('load', async function () {
 				.balanceOf(accounts[0])
 				.call()
 				.then(function (balance) {
-					document.getElementById('wallet_balance').innerText = format(balance)
+					document.getElementById('wallet_balance').innerText = format(balance / 1e8)
 				})
 
 			contract.methods
 				.balanceOf(tokenAddress)
 				.call()
 				.then(function (balance) {
-					document.getElementById('contract_balance').innerText = format(balance)
-					document.querySelector('.percent').style.width = balance / maxSupply / 1e6 + '%'
+					let percent = ((maxSupply - balance / 1e8) / maxSupply) * 100
+					if (percent < 4) percent = 4
+
+					document.getElementById('contract_balance').innerText = format(maxSupply - balance / 1e8)
+					document.querySelector('.percent').style.width = percent + '%'
 				})
 
 			document.getElementById('btn_connect').innerHTML = 'Connected'
@@ -552,7 +570,6 @@ window.addEventListener('load', async function () {
 	}
 
 	const format = (balance) => {
-		balance /= 1e8
 		balance = balance.toLocaleString(0, { minimumFractionDigits: 0 })
 		return balance
 	}
