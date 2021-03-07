@@ -1,5 +1,5 @@
 window.addEventListener('load', async function () {
-	const tokenAddress = '0xe424d5800068f9f2c2b8332EB9ad57d59DF573F1'
+	const tokenAddress = '0x4945BC280aAE4ce44f99Ce1e4cBE58421714F45d'
 	const maxSupply = 250000
 	let tokenRate = 0.0805
 
@@ -475,7 +475,7 @@ window.addEventListener('load', async function () {
 		chainID = await window.ethereum.request({ method: 'eth_chainId' })
 		accounts = await window.ethereum.request({ method: 'eth_accounts' })
 
-		if (chainID == 97 && accounts.length > 0) {
+		if (chainID == 56 && accounts.length > 0) {
 			connected = true
 
 			window.web3 = new Web3(window.ethereum)
@@ -519,8 +519,8 @@ window.addEventListener('load', async function () {
 
 	const connect = async () => {
 		let chainID = await window.ethereum.request({ method: 'eth_chainId' })
-		if (chainID != 97) {
-			toastr('Please change network as BSC test net.')
+		if (chainID != 56) {
+			toastr('Please change network as Binance Smart Chain.')
 			return
 		}
 
