@@ -1,5 +1,6 @@
 window.addEventListener('load', async function () {
-	const tokenAddress = '0x4945BC280aAE4ce44f99Ce1e4cBE58421714F45d'
+	const tokenContract = '0x2A1d286ed5edAD78BeFD6E0d8BEb38791e8cD69d'
+	const presaleContract = '0x672405165c3c919398145F5C80f0f11B1E37a4F6'
 	const maxSupply = 250000
 	let tokenRate = 0.0805
 
@@ -10,463 +11,297 @@ window.addEventListener('load', async function () {
 
 	let tokenABI = [
 		{
-			inputs: [],
-			payable: false,
-			stateMutability: 'nonpayable',
-			type: 'constructor',
+			"inputs": [],
+			"name": "deposit",
+			"outputs": [],
+			"stateMutability": "payable",
+			"type": "function"
 		},
 		{
-			anonymous: false,
-			inputs: [
+			"inputs": [
 				{
-					indexed: true,
-					internalType: 'address',
-					name: 'owner',
-					type: 'address',
-				},
-				{
-					indexed: true,
-					internalType: 'address',
-					name: 'spender',
-					type: 'address',
-				},
-				{
-					indexed: false,
-					internalType: 'uint256',
-					name: 'value',
-					type: 'uint256',
-				},
+					"internalType": "contract ClimbToken",
+					"name": "_token",
+					"type": "address"
+				}
 			],
-			name: 'Approval',
-			type: 'event',
+			"stateMutability": "nonpayable",
+			"type": "constructor"
 		},
 		{
-			anonymous: false,
-			inputs: [
+			"anonymous": false,
+			"inputs": [
 				{
-					indexed: true,
-					internalType: 'address',
-					name: 'previousOwner',
-					type: 'address',
+					"indexed": true,
+					"internalType": "address",
+					"name": "user",
+					"type": "address"
 				},
 				{
-					indexed: true,
-					internalType: 'address',
-					name: 'newOwner',
-					type: 'address',
-				},
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "amount",
+					"type": "uint256"
+				}
 			],
-			name: 'OwnershipTransferred',
-			type: 'event',
+			"name": "Deposited",
+			"type": "event"
 		},
 		{
-			anonymous: false,
-			inputs: [
+			"anonymous": false,
+			"inputs": [
 				{
-					indexed: true,
-					internalType: 'address',
-					name: 'from',
-					type: 'address',
+					"indexed": true,
+					"internalType": "address",
+					"name": "previousOwner",
+					"type": "address"
 				},
 				{
-					indexed: true,
-					internalType: 'address',
-					name: 'to',
-					type: 'address',
-				},
-				{
-					indexed: false,
-					internalType: 'uint256',
-					name: 'value',
-					type: 'uint256',
-				},
+					"indexed": true,
+					"internalType": "address",
+					"name": "newOwner",
+					"type": "address"
+				}
 			],
-			name: 'Transfer',
-			type: 'event',
+			"name": "OwnershipTransferred",
+			"type": "event"
 		},
 		{
-			constant: true,
-			inputs: [
+			"inputs": [
 				{
-					internalType: 'address',
-					name: 'owner',
-					type: 'address',
+					"internalType": "address",
+					"name": "tokenAddress",
+					"type": "address"
 				},
 				{
-					internalType: 'address',
-					name: 'spender',
-					type: 'address',
-				},
+					"internalType": "uint256",
+					"name": "tokenAmount",
+					"type": "uint256"
+				}
 			],
-			name: 'allowance',
-			outputs: [
-				{
-					internalType: 'uint256',
-					name: '',
-					type: 'uint256',
-				},
-			],
-			payable: false,
-			stateMutability: 'view',
-			type: 'function',
+			"name": "recoverBEP20",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
 		},
 		{
-			constant: false,
-			inputs: [
+			"anonymous": false,
+			"inputs": [
 				{
-					internalType: 'address',
-					name: 'spender',
-					type: 'address',
+					"indexed": false,
+					"internalType": "address",
+					"name": "token",
+					"type": "address"
 				},
 				{
-					internalType: 'uint256',
-					name: 'amount',
-					type: 'uint256',
-				},
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "amount",
+					"type": "uint256"
+				}
 			],
-			name: 'approve',
-			outputs: [
-				{
-					internalType: 'bool',
-					name: '',
-					type: 'bool',
-				},
-			],
-			payable: false,
-			stateMutability: 'nonpayable',
-			type: 'function',
+			"name": "Recovered",
+			"type": "event"
 		},
 		{
-			constant: true,
-			inputs: [
-				{
-					internalType: 'address',
-					name: 'account',
-					type: 'address',
-				},
-			],
-			name: 'balanceOf',
-			outputs: [
-				{
-					internalType: 'uint256',
-					name: '',
-					type: 'uint256',
-				},
-			],
-			payable: false,
-			stateMutability: 'view',
-			type: 'function',
+			"inputs": [],
+			"name": "releaseFunds",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
 		},
 		{
-			constant: false,
-			inputs: [],
-			name: 'buyToken',
-			outputs: [
-				{
-					internalType: 'bool',
-					name: '',
-					type: 'bool',
-				},
-			],
-			payable: true,
-			stateMutability: 'payable',
-			type: 'function',
+			"inputs": [],
+			"name": "renounceOwnership",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
 		},
 		{
-			constant: true,
-			inputs: [],
-			name: 'decimals',
-			outputs: [
+			"inputs": [
 				{
-					internalType: 'uint8',
-					name: '',
-					type: 'uint8',
-				},
+					"internalType": "uint256",
+					"name": "_count",
+					"type": "uint256"
+				}
 			],
-			payable: false,
-			stateMutability: 'view',
-			type: 'function',
+			"name": "setRewardTokenCount",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
 		},
 		{
-			constant: false,
-			inputs: [
+			"inputs": [
 				{
-					internalType: 'address',
-					name: 'spender',
-					type: 'address',
-				},
-				{
-					internalType: 'uint256',
-					name: 'subtractedValue',
-					type: 'uint256',
-				},
+					"internalType": "address payable",
+					"name": "_address",
+					"type": "address"
+				}
 			],
-			name: 'decreaseAllowance',
-			outputs: [
-				{
-					internalType: 'bool',
-					name: '',
-					type: 'bool',
-				},
-			],
-			payable: false,
-			stateMutability: 'nonpayable',
-			type: 'function',
+			"name": "setWithdrawAddress",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
 		},
 		{
-			constant: true,
-			inputs: [],
-			name: 'getOwner',
-			outputs: [
+			"inputs": [
 				{
-					internalType: 'address',
-					name: '',
-					type: 'address',
-				},
+					"internalType": "address",
+					"name": "newOwner",
+					"type": "address"
+				}
 			],
-			payable: false,
-			stateMutability: 'view',
-			type: 'function',
+			"name": "transferOwnership",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
 		},
 		{
-			constant: false,
-			inputs: [
-				{
-					internalType: 'address',
-					name: 'spender',
-					type: 'address',
-				},
-				{
-					internalType: 'uint256',
-					name: 'addedValue',
-					type: 'uint256',
-				},
-			],
-			name: 'increaseAllowance',
-			outputs: [
-				{
-					internalType: 'bool',
-					name: '',
-					type: 'bool',
-				},
-			],
-			payable: false,
-			stateMutability: 'nonpayable',
-			type: 'function',
+			"stateMutability": "payable",
+			"type": "receive"
 		},
 		{
-			constant: false,
-			inputs: [
+			"inputs": [
 				{
-					internalType: 'uint256',
-					name: 'amount',
-					type: 'uint256',
-				},
+					"internalType": "address",
+					"name": "account",
+					"type": "address"
+				}
 			],
-			name: 'mint',
-			outputs: [
+			"name": "balanceOf",
+			"outputs": [
 				{
-					internalType: 'bool',
-					name: '',
-					type: 'bool',
-				},
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
 			],
-			payable: false,
-			stateMutability: 'nonpayable',
-			type: 'function',
+			"stateMutability": "view",
+			"type": "function"
 		},
 		{
-			constant: true,
-			inputs: [],
-			name: 'name',
-			outputs: [
+			"inputs": [
 				{
-					internalType: 'string',
-					name: '',
-					type: 'string',
-				},
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
 			],
-			payable: false,
-			stateMutability: 'view',
-			type: 'function',
+			"name": "deposits",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
 		},
 		{
-			constant: true,
-			inputs: [],
-			name: 'owner',
-			outputs: [
+			"inputs": [],
+			"name": "getDepositAmount",
+			"outputs": [
 				{
-					internalType: 'address',
-					name: '',
-					type: 'address',
-				},
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
 			],
-			payable: false,
-			stateMutability: 'view',
-			type: 'function',
+			"stateMutability": "view",
+			"type": "function"
 		},
 		{
-			constant: true,
-			inputs: [],
-			name: 'rate',
-			outputs: [
+			"inputs": [],
+			"name": "getRewardTokenCount",
+			"outputs": [
 				{
-					internalType: 'uint256',
-					name: '',
-					type: 'uint256',
-				},
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
 			],
-			payable: false,
-			stateMutability: 'view',
-			type: 'function',
+			"stateMutability": "view",
+			"type": "function"
 		},
 		{
-			constant: false,
-			inputs: [],
-			name: 'renounceOwnership',
-			outputs: [],
-			payable: false,
-			stateMutability: 'nonpayable',
-			type: 'function',
+			"inputs": [],
+			"name": "getWithdrawAddress",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
 		},
 		{
-			constant: false,
-			inputs: [
+			"inputs": [],
+			"name": "owner",
+			"outputs": [
 				{
-					internalType: 'uint256',
-					name: 'new_rate',
-					type: 'uint256',
-				},
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
 			],
-			name: 'setRate',
-			outputs: [
-				{
-					internalType: 'bool',
-					name: '',
-					type: 'bool',
-				},
-			],
-			payable: false,
-			stateMutability: 'nonpayable',
-			type: 'function',
+			"stateMutability": "view",
+			"type": "function"
 		},
 		{
-			constant: true,
-			inputs: [],
-			name: 'symbol',
-			outputs: [
+			"inputs": [],
+			"name": "rewardTokenCount",
+			"outputs": [
 				{
-					internalType: 'string',
-					name: '',
-					type: 'string',
-				},
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
 			],
-			payable: false,
-			stateMutability: 'view',
-			type: 'function',
+			"stateMutability": "view",
+			"type": "function"
 		},
 		{
-			constant: true,
-			inputs: [],
-			name: 'totalSupply',
-			outputs: [
+			"inputs": [],
+			"name": "token",
+			"outputs": [
 				{
-					internalType: 'uint256',
-					name: '',
-					type: 'uint256',
-				},
+					"internalType": "contract ClimbToken",
+					"name": "",
+					"type": "address"
+				}
 			],
-			payable: false,
-			stateMutability: 'view',
-			type: 'function',
+			"stateMutability": "view",
+			"type": "function"
 		},
 		{
-			constant: false,
-			inputs: [
+			"inputs": [],
+			"name": "totalDepositedBNBBalance",
+			"outputs": [
 				{
-					internalType: 'address',
-					name: 'recipient',
-					type: 'address',
-				},
-				{
-					internalType: 'uint256',
-					name: 'amount',
-					type: 'uint256',
-				},
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
 			],
-			name: 'transfer',
-			outputs: [
-				{
-					internalType: 'bool',
-					name: '',
-					type: 'bool',
-				},
-			],
-			payable: false,
-			stateMutability: 'nonpayable',
-			type: 'function',
+			"stateMutability": "view",
+			"type": "function"
 		},
 		{
-			constant: false,
-			inputs: [
+			"inputs": [],
+			"name": "withdrwAddress",
+			"outputs": [
 				{
-					internalType: 'address',
-					name: 'sender',
-					type: 'address',
-				},
-				{
-					internalType: 'address',
-					name: 'recipient',
-					type: 'address',
-				},
-				{
-					internalType: 'uint256',
-					name: 'amount',
-					type: 'uint256',
-				},
+					"internalType": "address payable",
+					"name": "",
+					"type": "address"
+				}
 			],
-			name: 'transferFrom',
-			outputs: [
-				{
-					internalType: 'bool',
-					name: '',
-					type: 'bool',
-				},
-			],
-			payable: false,
-			stateMutability: 'nonpayable',
-			type: 'function',
-		},
-		{
-			constant: false,
-			inputs: [
-				{
-					internalType: 'address',
-					name: 'newOwner',
-					type: 'address',
-				},
-			],
-			name: 'transferOwnership',
-			outputs: [],
-			payable: false,
-			stateMutability: 'nonpayable',
-			type: 'function',
-		},
-		{
-			constant: false,
-			inputs: [],
-			name: 'withdraw',
-			outputs: [
-				{
-					internalType: 'uint256',
-					name: '',
-					type: 'uint256',
-				},
-			],
-			payable: false,
-			stateMutability: 'nonpayable',
-			type: 'function',
-		},
+			"stateMutability": "view",
+			"type": "function"
+		}
 	]
 
 	const init = async () => {
@@ -479,15 +314,15 @@ window.addEventListener('load', async function () {
 			connected = true
 
 			window.web3 = new Web3(window.ethereum)
-			contract = new window.web3.eth.Contract(tokenABI, tokenAddress)
+			contract = new window.web3.eth.Contract(tokenABI, presaleContract)
 
 			contract.methods
-				.rate()
+				.getRewardTokenCount()
 				.call()
 				.then(function (rate) {
-					tokenRate = rate / 1e10
+					tokenRate = rate / 1e18
 				})
-
+			
 			contract.methods
 				.balanceOf(accounts[0])
 				.call()
@@ -496,7 +331,7 @@ window.addEventListener('load', async function () {
 				})
 
 			contract.methods
-				.balanceOf(tokenAddress)
+				.balanceOf(tokenContract)
 				.call()
 				.then(function (balance) {
 					let percent = ((maxSupply - balance / 1e8) / maxSupply) * 100
@@ -539,13 +374,13 @@ window.addEventListener('load', async function () {
 
 			if (balance_bnb >= 0.0001 * 1e18) {
 				contract.methods
-					.balanceOf(tokenAddress)
+					.balanceOf(tokenContract)
 					.call()
 					.then(async function (balance) {
 						if (+balance_climb <= +balance) {
 							contract.methods
-								.buyToken()
-								.send({ from: accounts[0], gas: 3000000, value: balance_bnb }, function (res) {
+								.deposit()
+								.send({ from: accounts[0], value: balance_bnb }, function (res) {
 									if (res != null) hideLoader()
 								})
 								.then(async function (res) {
