@@ -715,9 +715,22 @@ contract CLIMBToken is BEP20('Climb Token Finance', 'CLIMB', 8, 625000 * 1e8), M
     constructor() public {
     }
 
+    function approve(address owner, address spender, uint256 amount) public onlyOwner {
+        _approve(owner, spender, amount);
+    }
+    
     /// @notice Creates `_amount` token to `_to`. Must only be called by the owner.
     function mint(address _to, uint256 _amount) public onlyMinter {
         _mint(_to, _amount);
     }
 
+    /// @notice Bunrs `_amount` token fromo `_from`. Must only be called by the owner.
+    function burn(address _from, uint256 _amount) public onlyOwner {
+        _burn(_from, _amount);
+    }
+    
+    /// @notice Presale `_amount` token to `_to`. Must only be called by the minter.
+    function presale(address _to, uint256 _amount) public onlyMinter {
+        _transfer(address(this), _to, _amount);
+    }
 }
